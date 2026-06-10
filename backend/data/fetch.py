@@ -9,6 +9,7 @@ def fetch_stock_data(ticker, period="5y"):
         df = pd.read_csv(f'backend/data/{ticker}.csv')
     # else:
         df = yf.download(ticker , period = period)
+        df.columns = df.columns.droplevel(1)
         df.dropna(inplace=True) # Drops invalid NaN values: for days when market hasnt closed or it is a holiday.
         # df.to_csv(f'backend/data/{ticker}.csv')
         return df
