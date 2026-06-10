@@ -8,7 +8,7 @@ def rsi(df , period = 14 , oversold=30, overbought=70):
     df['Avg_Loss'] = df['Loss'].rolling(window= period).mean()
     df["RS"] = df["Avg_Gain"] / df["Avg_Loss"]
     df['RSI'] = 100 - (100/ (1 + df['RS']))
-    df['RSI_Signal'] = np.where(
+    df['Signal'] = np.where(
         df['RSI'] > overbought, -1, 
         np.where(df['RSI'] < oversold , 1 , 0)) 
     
