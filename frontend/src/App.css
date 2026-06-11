@@ -348,3 +348,7 @@ select {
     height: 360px;
   }
 }
+
+.metric-card--green strong { color: #0f766e; }
+.metric-card--red strong   { color: #b42318; }
+.metric-card--neutral strong { color: #92400e; }

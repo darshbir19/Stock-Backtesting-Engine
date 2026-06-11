@@ -88,18 +88,22 @@ function App() {
         {
           label: "Final Value",
           value: currencyFormatter.format(results.final_value || 0),
+          color: results.final_value > 10000 ? "green" : "red",
         },
         {
           label: "Win Rate",
           value: formatPercent(results.win_rate),
+          color: results.win_rate > 0.5 ? "green" : "red",
         },
         {
           label: "Max Drawdown",
           value: formatPercent(results.max_drawdown),
+          color: results.max_drawdown > 0.2 ? "red" : "green",
         },
         {
           label: "Sharpe Ratio",
           value: Number(results.sharpe_ratio || 0).toFixed(3),
+          color: results.sharpe_ratio > 1 ? "green" : results.sharpe_ratio > 0 ? "neutral" : "red",
         },
       ]
     : [];
@@ -109,7 +113,7 @@ function App() {
       <section className="dashboard">
         <header className="dashboard-header">
           <div>
-            <p className="eyebrow">Strategy Workbench</p>
+            <p className="eyebrow" >Strategy Backtester</p>
             <h1>Backtest trading ideas with clean performance context.</h1>
           </div>
           <div className="status-pill">
@@ -177,11 +181,14 @@ function App() {
               <>
                 <div className="metric-grid">
                   {metrics.map((metric) => (
-                    <article className="metric-card" key={metric.label}>
+                  <article 
+                      className={`metric-card metric-card--${metric.color}`} 
+                      key={metric.label}
+                  >
                       <p>{metric.label}</p>
                       <strong>{metric.value}</strong>
-                    </article>
-                  ))}
+                  </article>
+                ))}
                 </div>
 
                 <div className="chart-card">
