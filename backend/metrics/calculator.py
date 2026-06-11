@@ -12,13 +12,19 @@ def calculate_metrics(portfolio_list):
     running_peak = np.maximum.accumulate(portfolio_arr)
     mdd = (running_peak -  portfolio_arr)/running_peak
     mdd = np.max(mdd)
+    if not np.isfinite(mdd):
+        mdd = 0.0
 
     risk_free = 0.05/252
     excess_returns = daily_returns - risk_free
     mean_ex = np.mean(excess_returns)
     std_ex = np.std(excess_returns , ddof = 1)
 
-    sharpe_ratio = mean_ex/std_ex * math.sqrt(252)
+    if std_ex == 0:
+        sharpe_ratio = 0.0
+    else:
+        sharpe_ratio = mean_ex / std_ex * math.sqrt(252)
+
 
     return win_rate , mdd , sharpe_ratio
 
