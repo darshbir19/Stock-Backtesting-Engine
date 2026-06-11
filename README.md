@@ -30,7 +30,7 @@ A full-stack algorithmic trading backtester built to test trading strategies aga
 ## Project Structure
 
 ```
-trading-backtester/
+Stock-Backtesting-Engine/
 ├── backend/
 │   ├── data/           # yfinance data fetching with local CSV cache
 │   ├── strategies/     # Moving Average, RSI signal generators
