@@ -22,11 +22,13 @@ def backtest(ticker: str, strategy: str):
     elif strategy == "rsi":
         df = rsi.rsi(df)
     portfolio_list, trade_list = engine.run_backtest(df)
+    portfolio_data = [{"day": i, "value": v} for i, v in enumerate(portfolio_list)]
     win_rate , mdd , sharpe_ratio = calculator.calculate_metrics(portfolio_list)
     final_value = portfolio_list[-1]
     return {                                             
     "final_value": final_value,
     "win_rate": win_rate,
     "max_drawdown": mdd,
-    "sharpe_ratio": sharpe_ratio
+    "sharpe_ratio": sharpe_ratio,
+    "portfolio": portfolio_data
 }
