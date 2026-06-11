@@ -44,6 +44,7 @@ function App() {
                 onChange={(e) => setStrategy(e.target.value)}>
                 <option value="moving_average">Moving Average</option>
                 <option value="rsi">RSI</option>
+                <option value="lstm">LSTM</option>
             </select>
           </div>
 

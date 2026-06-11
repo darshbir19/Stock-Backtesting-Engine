@@ -6,3 +6,6 @@ __pycache__/
 backend/data/*.csv
 
 .venv/
+
+backend/ml/saved_model.keras
+backend/ml/scaler.pkl

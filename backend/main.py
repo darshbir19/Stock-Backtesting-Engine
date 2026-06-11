@@ -4,6 +4,7 @@ from backend.data import fetch
 from backend.strategies import moving_average , rsi
 from backend.backtest import engine
 from backend.metrics import calculator
+from backend.ml.predict import generate_lstm_signals
 app = FastAPI()
 
 app.add_middleware(
@@ -21,6 +22,8 @@ def backtest(ticker: str, strategy: str):
         df = moving_average.moving_average_crossover(df)
     elif strategy == "rsi":
         df = rsi.rsi(df)
+    elif strategy == "lstm":
+        df = generate_lstm_signals(df)
     portfolio_list, trade_list = engine.run_backtest(df)
     portfolio_data = [{"day": i, "value": v} for i, v in enumerate(portfolio_list)]
     win_rate , mdd , sharpe_ratio = calculator.calculate_metrics(portfolio_list)
