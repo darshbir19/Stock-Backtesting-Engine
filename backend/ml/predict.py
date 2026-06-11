@@ -1,16 +1,25 @@
-# backend/ml/predict.py
-
-from tensorflow.keras.models import load_model
 import numpy as np
 import pickle
 
 from backend.ml.model import prepare_features
 
 
+def load_lstm_model(path):
+    try:
+        from tensorflow.keras.models import load_model
+    except ModuleNotFoundError as exc:
+        raise RuntimeError(
+            "LSTM strategy requires TensorFlow. Install it in the backend "
+            "environment with: pip install tensorflow"
+        ) from exc
+
+    return load_model(path)
+
+
 def generate_lstm_signals(df, sequence_length=60):
 
     # Load trained model
-    model = load_model("backend/ml/saved_model.keras")
+    model = load_lstm_model("backend/ml/saved_model.keras")
 
     # Load scaler
     with open("backend/ml/scaler.pkl", "rb") as f:

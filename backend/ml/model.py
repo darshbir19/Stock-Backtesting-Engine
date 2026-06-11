@@ -1,5 +1,3 @@
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import LSTM, Dropout, Dense
 import numpy as np
 from backend.data import fetch
 from backend.strategies import moving_average , rsi
@@ -28,6 +26,9 @@ def create_sequences(feature_df, sequence_length=60):
 
 
 def build_model(sequence_length=60, n_features=5):
+    from tensorflow.keras.layers import LSTM, Dropout, Dense
+    from tensorflow.keras.models import Sequential
+
     model = Sequential()
 
     model.add(
