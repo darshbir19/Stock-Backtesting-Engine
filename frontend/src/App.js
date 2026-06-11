@@ -67,7 +67,10 @@ function App() {
       const response = await fetch(`http://127.0.0.1:8000/backtest?${params}`);
 
       if (!response.ok) {
-        throw new Error("The backtest service returned an error.");
+        const errorData = await response.json().catch(() => null);
+        throw new Error(
+          errorData?.detail || "The backtest service returned an error."
+        );
       }
 
       const data = await response.json();
