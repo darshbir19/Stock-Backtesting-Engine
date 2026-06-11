@@ -1,4 +1,14 @@
 import { useState } from "react"
+import { 
+  LineChart, 
+  Line, 
+  XAxis, 
+  YAxis, 
+  CartesianGrid, 
+  Tooltip, 
+  Legend, 
+  ResponsiveContainer 
+} from 'recharts';
 
 function App() {
     const [ticker, setTicker] = useState("AAPL")
@@ -51,6 +61,44 @@ function App() {
                 <p>Win Rate: {(results.win_rate * 100).toFixed(2)}%</p>
                 <p>Max Drawdown: {(results.max_drawdown * 100).toFixed(2)}%</p>
                 <p>Sharpe Ratio: {results.sharpe_ratio.toFixed(3)}</p>
+
+                <div style={{width: "100%", minHeight: "400px"}}>
+                  <ResponsiveContainer width="100%" height={400}>
+                    <LineChart
+            responsive
+            data={results.portfolio}
+            margin={{
+              top: 5,
+              right: 0,
+              left: 0,
+              bottom: 5,
+            }}
+          >
+            <CartesianGrid strokeDasharray="3 3" stroke="#8884d8" />
+            <XAxis dataKey="day" stroke="#8884d8" />
+            <YAxis width="auto" stroke="#8884d8" />
+            <Tooltip
+              cursor={{
+                stroke: "#8884d8",
+              }}
+              contentStyle={{
+                backgroundColor: 'var(--color-surface-raised)',
+                borderColor: "#8884d8",
+              }}
+            />
+            <Legend />  
+            <Line
+              type="monotone"
+              dataKey="value"
+              stroke="#8884d8"
+              dot={
+                false
+              }
+              activeDot={{ stroke: "#8884d8" }}
+            />
+          </LineChart>
+          </ResponsiveContainer>  
+          </div>
             </div>
           )}
         </div>
