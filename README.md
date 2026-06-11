@@ -155,4 +155,4 @@ GET http://localhost:8000/backtest?ticker=AAPL&strategy=lstm
 
 **Darshbir Singh**  
 Computer Engineering, HKUST  
-[GitHub](https://github.com/darshbir19) · [LinkedIn](https://linkedin.com/in/darshbir-singh)
+[GitHub](https://github.com/darshbir19) · [LinkedIn](https://www.linkedin.com/in/darshbirsingh/)
