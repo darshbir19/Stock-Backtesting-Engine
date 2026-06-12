@@ -68,6 +68,14 @@ A recurrent neural network trained on 60-day sequences of Close price, Volume, R
 | **Win Rate** | Percentage of trading days with a positive return |
 
 ---
+## Architecture
+
+### Data Pipeline
+- **Caching**: Historical stock data is cached locally as CSV files in `backend/data/`. 
+  On subsequent runs, the pipeline checks for an existing file before hitting the 
+  yfinance API, reducing load time for cached tickers to near-zero.
+
+---
 
 ## Key Findings
 
@@ -137,17 +145,6 @@ GET http://localhost:8000/backtest?ticker=AAPL&strategy=moving_average
 GET http://localhost:8000/backtest?ticker=AAPL&strategy=rsi
 GET http://localhost:8000/backtest?ticker=AAPL&strategy=lstm
 ```
-
----
-
-## Future Improvements
-
-- **Position sizing** — currently all-in or all-out. A real system would size positions based on volatility (e.g. Kelly Criterion)
-- **Short selling** — current engine only goes long. Adding short positions would allow profiting from downtrends
-- **Multi-asset portfolio** — backtest a basket of stocks with correlation-aware allocation
-- **Walk-forward validation** — retrain the LSTM on a rolling window to avoid lookahead bias
-- **More LSTM features** — adding MACD, Bollinger Bands, and sector momentum signals would likely improve directional accuracy
-- **Transaction costs** — current backtest ignores slippage and commissions, which would reduce real-world returns
 
 ---
 

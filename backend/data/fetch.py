@@ -3,6 +3,7 @@ import yfinance as yf
 import os
 
 def fetch_stock_data(ticker, period="5y"):
+    os.makedirs(f'backend/data', exist_ok=True)
     cache_path = f'backend/data/{ticker}.csv'
     
     if os.path.exists(cache_path):
