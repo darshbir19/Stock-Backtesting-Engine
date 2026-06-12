@@ -2,17 +2,17 @@ import pandas as pd
 import yfinance as yf
 import os
 
-
 def fetch_stock_data(ticker, period="5y"):
-
-    # if os.path.exists(f'backend/data/{ticker}.csv'):
-    # else:
-        df = yf.download(ticker , period = period)
-        df.columns = df.columns.droplevel(1)
-        df.dropna(inplace=True) # Drops invalid NaN values: for days when market hasnt closed or it is a holiday.
-        # df.to_csv(f'backend/data/{ticker}.csv')
-        return df
-
+    cache_path = f'backend/data/{ticker}.csv'
+    
+    if os.path.exists(cache_path):
+        return pd.read_csv(cache_path, index_col=0, parse_dates=True)
+    
+    df = yf.download(ticker, period=period)
+    df.columns = df.columns.droplevel(1)
+    df.dropna(inplace=True)
+    df.to_csv(cache_path)
+    return df
 
 
 if __name__ == "__main__":
